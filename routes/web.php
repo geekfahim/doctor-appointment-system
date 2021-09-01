@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,17 +14,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard.dashboard');
+// })->name('dashboard');
+
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', function () {
+Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
-});
-Route::get('/test', function () {
-    return view('dashboard.test');
-});
-
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
 })->name('dashboard');
+
+
+Route::resource('doctor', DoctorController::class);
+
+
+
+
+
+
+
+
+// Route::get('/test', function () {
+//     return view('dashboard.test');
+// });
