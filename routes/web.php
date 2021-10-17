@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,17 +21,21 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard.dashboard');
 });
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 })->name('dashboard');
 
+// Route::get('doctor/{id}/edit',[DoctorController::class,'edit']);
 
-Route::resource('doctor', DoctorController::class);
+Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>['auth','admin']],function () {
+    Route::resource('doctor', DoctorController::class);
 
+});
+// Route::middleware(['auth', 'second'])->group(function () {
 
-
+// });
 
 
 

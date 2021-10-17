@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Role::create(['name'=>'Admin']);
-        Role::create(['name'=>'Doctor']);
-        Role::create(['name'=>'Patient']);
+        Role::create(['id'=>1,'name'=>'Admin']);
+        Role::create(['id'=>2,'name'=>'Doctor']);
+        Role::create(['id'=>3,'name'=>'Patient']);
 
         $systemuser = new User();
         $systemuser->name ="admin";
@@ -30,5 +30,7 @@ class DatabaseSeeder extends Seeder
         $systemuser->remember_token = Str::random(10);
         $systemuser->email_verified_at = now();
         $systemuser->save();
+
+        $this->call([UserTableSeeder::class]);
     }
 }

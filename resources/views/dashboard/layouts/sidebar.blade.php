@@ -23,19 +23,29 @@
                         <a href="pages/navbar.html"><i class="ik ik-menu"></i><span>Navigation</span>
                             <span class="badge badge-success">New</span></a>
                     </div>
+                    @can('admin')
                     <div class="nav-lavel">{{ __('Doctors') }}</div>
                     <div class="nav-item has-sub">
                         <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>{{ __('Doctors') }}</span>
                             <span class="badge badge-danger">10+</span></a>
                         <div class="submenu-content">
-                            <a href="{{ route('doctor.create') }}" class="menu-item">Add New Doctor</a>
+                            <a href="{{ route('admin.doctor.index') }}" class="menu-item">{{ __('Doctors') }}</a>
                             <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>
                             <a href="pages/widget-data.html" class="menu-item">Data</a>
                             <a href="pages/widget-chart.html" class="menu-item">Chart Widget</a>
                         </div>
                     </div>
+                    @endcan
                     <div class="nav-lavel">Patients</div>
-
+                    <div class="nav-item has-sub">
+                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Widgets</span> <span class="badge badge-danger">150+</span></a>
+                        <div class="submenu-content">
+                            <a href="pages/widgets.html" class="menu-item">Basic</a>
+                            <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>
+                            <a href="pages/widget-data.html" class="menu-item">Data</a>
+                            <a href="pages/widget-chart.html" class="menu-item">Chart Widget</a>
+                        </div>
+                    </div>
                 </nav>
             </div>
         </div>

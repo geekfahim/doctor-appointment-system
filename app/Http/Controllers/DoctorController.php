@@ -2,112 +2,118 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\doctor\DoctorRequest;
 use App\Models\Doctor;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Validation\Rule;
 use illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
-class DoctorController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('dashboard.doctor.index');
+class DoctorController extends Controller {
+    public function index() {
+        $this->authorize('admin');
+        $doctors = User::latest()->where('role_id', '=', '2')->get();
+        return view('dashboard.doctor.index', compact('doctors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('dashboard.doctor.create');
+    public function create() {
+        $genders = getGenders();
+        $departments = getSpecialistDepartment();
+        return view('dashboard.doctor.create', compact('genders', 'departments'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request,[
-            'name' => ['required','min:2','max:50'],
-            'email' => ['required','min:2','max:50',Rule::unique('users','email')],
-            'password' => ['required','min:6','max:25'],
-            'gender' => ['required'],
-            'education' => ['nullable','min:2','max:50'],
-            'phone' => ['nullable','min:2','max:50'],
-            'address' => ['nullable','min:2','max:50'],
-            'description' => ['nullable','min:2','max:50'],
-            'role_id' =>  ['required'],
-            'department' => ['required','min:2','max:50'],
-            'profile_photo_path' => ['nullable','mimes:jpeg,jpg,png'],
-        ]);
-
+    public function store(DoctorRequest $request) {
+        // $this->createValidation($request);
         $doctor = new User();
         $doctor->name = $request->name;
         $doctor->email = $request->email;
         $doctor->password = bcrypt($request->password);
         $doctor->gender = $request->gender;
         $doctor->education = $request->education;
+        $doctor->phone = $request->phone ?: '';
+        $doctor->address = $request->address ?: '';
+        $doctor->description = $request->description ?: '';
+        $doctor->role_id = $request->role_id;
+        $doctor->department = $request->department;
+        if ($request->hasFile('profile_photo_path')) {
+            $image = $request->profile_photo_path;
+            $name = Str::random(40) . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/doctors', $name);
+            // $products->image = $name;
+            $doctor->profile_photo_path = $name;
+        }
+        // dd($doctor);
+        $doctor->save();
+        return redirect('doctor');
+
+    }
+
+    public function show($id) {
+        dd('show here', $id);
+    }
+
+    public function edit(User $doctor) {
+        $genders = getGenders();
+        $departments = getSpecialistDepartment();
+        // $doctor = User::findOrFail($id);
+        // return dd($doctors);
+        return view('dashboard.doctor.edit', compact('doctor','genders','departments'));
+    }
+
+    public function update(Request $request, $id) {
+        //
+        $this->updateValidation($request);
+
+
+        $doctor = User::findOrFail($id);
+
+        // $role = Role::pluck();
+
+        $doctor->name = $request->name;
+        $doctor->email = $request->email;
+
+        $doctor->gender = $request->gender;
+        $doctor->education = $request->education;
         $doctor->phone = $request->phone;
         $doctor->address = $request->address;
         $doctor->description = $request->description;
-        $doctor->role_id = $request->role_id;
+        // $doctor->role_id = $request->role_id;
         $doctor->department = $request->department;
-        if($request->hasFile('profile_photo_path')){
+        if($request->password){
+            $doctor->password = bcrypt($request->password);
+        }
+        if ($request->hasFile('profile_photo_path')) {
             $image = $request->profile_photo_path;
-            $name = Str::random(40).'.'.$image->getClientOriginalExtension();
-            $image->storeAs('public/images/doctors',$name);
+            $name = Str::random(40) . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/doctors', $name);
             // $products->image = $name;
             $doctor->profile_photo_path = $name;
         }
         $doctor->save();
-        return redirect()->back()->with('message',  $doctor->name . 'doctor added!');
+        return redirect('doctor');
 
-    }
+        // User::create([
+        //     $doctor->name = $request->name,
+        //     $doctor->email = $request->email,
+        //     $doctor->password = bcrypt($request->password),
+        //     $doctor->gender = $request->gender,
+        //     $doctor->education = $request->education,
+        //     $doctor->phone = $request->phone,
+        //     $doctor->address = $request->address,
+        //     $doctor->description = $request->description,
+        //     $doctor->role_id = $request->role_id,
+        //     $doctor->department = $request->department,
+        //     if ($request->hasFile('profile_photo_path')) {
+        //         $image = $request->profile_photo_path;
+        //         $name = Str::random(40) . '.' . $image->getClientOriginalExtension();
+        //         $image->storeAs('public/images/doctors', $name);
+        //         // $products->image = $name;
+        //         $doctor->profile_photo_path = $name;
+        //     }
+        // ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Doctor $doctor)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Doctor $doctor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Doctor $doctor)
-    {
-        //
     }
 
     /**
@@ -116,8 +122,48 @@ class DoctorController extends Controller
      * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Doctor $doctor)
-    {
-        //
+
+    public function destroy($id) {
+
+        $doctor = User::findOrFail($id);
+        $doctor->delete();
+        return redirect()->route('doctor.index')
+            ->with('success', 'doctor deleted successfully');
+        return response()->json([
+            'message' => 'Data deleted successfully!',
+        ]);
     }
+
+/* Validation */
+    public function createValidaion($request) {
+
+        return $request->validate([
+            'name'        => ['required', 'max:50'],
+            'email'       => ['required', 'email', 'max:50'],
+            'passsword'   => ['required', 'min:6'],
+            'gender'      => ['required', Rule::in(getGenders())],
+            // 'role_id'     =>['required']
+            'education'   => ['required', 'string'],
+            'phone'       => ['required', 'numeric', 'digits:11'],
+            'address'     => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'department'  => ['required', Rule::in(getSpecialistDepartment())],
+            'image'       => ['nullable', 'mimes:jpg,bmp,png'],
+        ]);
+    }
+
+    public function updateValidation($request) {
+        return $request->validate([
+            'name'        => ['required', 'max:50'],
+            'email'       => ['required', 'email', Rule::unique('users', 'email')],
+            'passsword'   => ['nullable', 'min:6'],
+            'gender'      => ['required', Rule::in(getGenders())],
+            'education'   => ['nullable', 'string'],
+            'phone'       => ['nullable', 'numeric', 'digits:11'],
+            'address'     => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'department'  => ['nullable', Rule::in(getSpecialistDepartment())],
+            'image'       => ['nullable', 'mimes:jpg,bmp,png'],
+        ]);}
+
 }
