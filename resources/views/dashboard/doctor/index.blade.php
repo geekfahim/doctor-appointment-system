@@ -6,82 +6,82 @@
 @endpush
 
 @section('content')
-    <div class="container">
-        @include('dashboard.doctor._breadcrum')
+<div class="container">
+@include('dashboard.doctor._breadcrum')
 
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between">
-                        <h3>{{ __('All Doctors') }}</h3>
-                        <a href="{{ route('admin.doctor.create') }}"
-                            class="btn btn-primary float-right"><i class="ik ik-plus-circle"></i>{{ __('Add Doctor') }}</a>
-                    </div>
-                    <div class="card-body">
-                        <div id="data_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table id="data_table" class="table dataTable no-footer"
-                                        aria-describedby="data_table_info">
-                                        <thead>
-                                            <tr role="row">
-                                                <th class="sorting_asc" aria-sort="ascending">S/L</th>
-                                                <th class="nosort sorting_disabled">Photo</th>
-                                                <th class="sorting">Name</th>
-                                                <th class="sorting">Department</th>
-                                                <th class="sorting">Email</th>
-                                                <th class="nosort sorting_disabled" style="width: 100px">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (count($doctors) > 0)
-                                                @foreach ($doctors as $doctor)
-                                                    <tr role="row" class="odd">
-                                                        <td class="sorting_1">{{ $loop->iteration }}</td>
-                                                        <td>
-                                                            @if ($doctor->profile_photo_path)
-                                                                <img src="{{ asset('storage/images/doctors/' . $doctor->profile_photo_path) }}"
-                                                                    class="table-user-thumb" alt="">
-                                                            @else
-                                                                <img src="https://via.placeholder.com/150"
-                                                                    class="table-user-thumb" alt="image">
-                                                            @endif
-                                                        </td>
-                                                        <td>{{ $doctor->name }}</td>
-                                                        <td>{{ $doctor->department }}</td>
-                                                        <td>{{ $doctor->email }}</td>
-                                                        <td>
-                                                            <div class="table-actions">
-                                                                <a href=""><i class="ik ik-eye"></i></a>
-                                                                <a href="{{ route('admin.doctor.edit', $doctor->id) }}"><i
-                                                                        class="ik ik-edit-2"></i></a>
-                                                                <a href="#" data-id="{{ $doctor->id }}"
-                                                                    class="delete"><i
-                                                                        class="ik ik-trash-2"></i></a>
-                                                                {{-- <form action="{{ route('admin.doctor.destroy', $doctor->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm"><i class="ik ik-trash-2"></i></button>
-                        </form> --}}
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @else
-                                                <td>No data found</td>
-                                            @endif
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
+<div class="row justify-content-center">
+<div class="col-lg-12">
+<div class="card">
+<div class="card-header d-flex justify-content-between">
+<h3>{{ __('All Doctors') }}</h3>
+<a href="{{ route('admin.doctor.create') }}"
+class="btn btn-primary float-right"><i class="ik ik-plus-circle"></i>{{ __('Add Doctor') }}</a>
+</div>
+<div class="card-body">
+<div id="data_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+<div class="row">
+<div class="col-md-12">
+<table id="data_table" class="table dataTable no-footer"
+aria-describedby="data_table_info">
+<thead>
+<tr role="row">
+<th class="sorting_asc" aria-sort="ascending">S/L</th>
+<th class="nosort sorting_disabled">Photo</th>
+<th class="sorting">Name</th>
+<th class="sorting">Department</th>
+<th class="sorting">Email</th>
+<th class="nosort sorting_disabled" style="width: 100px">Actions</th>
+</tr>
+</thead>
+<tbody>
+@if (count($doctors) > 0)
+@foreach ($doctors as $doctor)
+<tr role="row" class="odd">
+<td class="sorting_1">{{ $loop->iteration }}</td>
+<td>
+    @if ($doctor->profile_photo_path)
+        <img src="{{ asset('storage/images/doctors/' . $doctor->profile_photo_path) }}"
+            class="table-user-thumb" alt="">
+    @else
+        <img src="https://via.placeholder.com/150"
+            class="table-user-thumb" alt="image">
+    @endif
+</td>
+<td>{{ $doctor->name }}</td>
+<td>{{ $doctor->department }}</td>
+<td>{{ $doctor->email }}</td>
+<td>
+    <div class="table-actions">
+        <a href=""><i class="ik ik-eye"></i></a>
+        <a href="{{ route('admin.doctor.edit', $doctor->id) }}"><i
+                class="ik ik-edit-2"></i></a>
+        <a href="#" data-id="{{ $doctor->id }}"
+            class="delete"><i
+                class="ik ik-trash-2"></i></a>
+        {{-- <form action="{{ route('admin.doctor.destroy', $doctor->id) }}" method="POST">
+@csrf
+@method('DELETE')
+<button type="submit" class="btn btn-sm"><i class="ik ik-trash-2"></i></button>
+</form> --}}
     </div>
+</td>
+</tr>
+@endforeach
+@else
+<td>No data found</td>
+@endif
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
 
 @endsection
 
@@ -124,50 +124,10 @@
                     }
                 });
             });
-
-
-
-
-
-
-
-
-
-
-
-
             $('#data_table').DataTable({
                 lengthChange: false,
                 dom: 'Bfrtip',
-                buttons: [{
-                        extend: 'print',
-                        // split: ['pdf', 'excel', 'csv'],
-                        autoprint: true,
-                        exportOptions: {
-                            columns: ':visible'
-                        },
-                        customize: function(win) {
-                            $(win.document.body)
-                                .css('font-size', '10pt')
-                                .prepend(
-                                    '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
-                                );
-
-                            $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                        }
-
-                    },
-                    // {
-                    //     extend: 'colvis'
-                    // },
-                    // { extend: 'csv', className: 'btn btn-success' },
-                    // { extend: 'pdf', className: 'btn btn-success' }
-                ]
             });
-            // table.buttons().container()
-            //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
         });
     </script>
 @endpush

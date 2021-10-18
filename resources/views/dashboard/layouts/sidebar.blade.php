@@ -19,6 +19,19 @@
                     <div class="nav-item active">
                         <a href="{{ route('dashboard') }}"><i class="ik ik-bar-chart-2"></i><span>{{ __('Dashboard') }}</span></a>
                     </div>
+                    @can('admin')
+                    <div class="nav-lavel">{{ __('Settings') }}</div>
+                    <div class="nav-item has-sub">
+                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>{{ __('Settings') }}</span>
+                            <span class="badge badge-danger">10+</span></a>
+                        <div class="submenu-content">
+                            <a href="{{ route('admin.time.index') }}" class="menu-item">{{ __('Appointment Time') }}</a>
+                            <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>
+                            <a href="pages/widget-data.html" class="menu-item">Data</a>
+                            <a href="pages/widget-chart.html" class="menu-item">Chart Widget</a>
+                        </div>
+                    </div>
+                    @endcan
                     <div class="nav-item">
                         <a href="pages/navbar.html"><i class="ik ik-menu"></i><span>Navigation</span>
                             <span class="badge badge-success">New</span></a>

@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         $systemuser->save();
 
         $this->call([UserTableSeeder::class]);
+        $this->call([AppointmentTimeSeeder::class]);
     }
 }

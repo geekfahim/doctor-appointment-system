@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
@@ -31,6 +32,7 @@ Route::get('/dashboard', function () {
 
 Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>['auth','admin']],function () {
     Route::resource('doctor', DoctorController::class);
+    Route::resource('time', TimeController::class);
 
 });
 // Route::middleware(['auth', 'second'])->group(function () {
