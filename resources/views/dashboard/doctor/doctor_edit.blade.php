@@ -12,7 +12,7 @@
                         </span>
                     @endif
                     <div class="card-body">
-                        <form class="forms-sample" action="{{ route('doctor.update', $doctor->id) }}" method="POST"
+                        <form class="forms-sample" action="{{ route('admin.doctor.update', $doctor->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

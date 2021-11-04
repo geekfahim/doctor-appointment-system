@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Traits\CommonTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,8 +12,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -21,12 +20,21 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use SoftDeletes;
+    Use CommonTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
+     *
      */
+    // Mutators for role
+    
+    const isAdmin = 1;
+    const isDoctor = 2;
+    const isPatient = 2;
+
+
     protected $fillable = [
         'name',
         'email',
@@ -40,7 +48,7 @@ class User extends Authenticatable
         'description',
         'profile_photo_path',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
@@ -73,9 +81,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function role(){
-        return $this->hasOne(Role::class,'id','role_id');
+    public function role() {
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
-
 
 }

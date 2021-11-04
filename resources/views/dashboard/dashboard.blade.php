@@ -5,7 +5,7 @@
             <div class="row align-items-end">
                 <div class="col-lg-8">
                     <div class="page-header-title">
-                        <i class="ik ik-edit bg-blue"></i>
+                        <i class="ik ik-hard-drive bg-blue"></i>
                         <div class="d-inline">
                             <h5>{{ __('Dashboard') }}</h5>
                         </div>

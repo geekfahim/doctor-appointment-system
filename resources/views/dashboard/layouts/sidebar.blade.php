@@ -17,41 +17,46 @@
                 <nav id="main-menu-navigation" class="navigation-main">
                     <div class="nav-lavel">{{ __('Dashboard') }}</div>
                     <div class="nav-item active">
-                        <a href="{{ route('dashboard') }}"><i class="ik ik-bar-chart-2"></i><span>{{ __('Dashboard') }}</span></a>
+                        <a href="{{ route('dashboard') }}"><i
+                                class="ik ik-bar-chart-2"></i><span>{{ __('Dashboard') }}</span></a>
                     </div>
                     @can('admin')
-                    <div class="nav-lavel">{{ __('Settings') }}</div>
-                    <div class="nav-item has-sub">
-                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>{{ __('Settings') }}</span>
-                            <span class="badge badge-danger">10+</span></a>
-                        <div class="submenu-content">
-                            <a href="{{ route('admin.time.index') }}" class="menu-item">{{ __('Appointment Time') }}</a>
-                            <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>
-                            <a href="pages/widget-data.html" class="menu-item">Data</a>
-                            <a href="pages/widget-chart.html" class="menu-item">Chart Widget</a>
+                        <div class="nav-lavel">{{ __('Settings') }}</div>
+                        <div class="nav-item has-sub">
+                            <a href="javascript:void(0)"><i class="ik ik-settings"></i><span>{{ __('Settings') }}</span>
+                                <span class="badge badge-danger">10+</span></a>
+                            <div class="submenu-content">
+                                <a href="{{ route('admin.time.index') }}"
+                                    class="menu-item">{{ __('Appointment Time') }}</a>
+                                <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>
+                                <a href="pages/widget-data.html" class="menu-item">Data</a>
+                                <a href="pages/widget-chart.html" class="menu-item">Chart Widget</a>
+                            </div>
                         </div>
-                    </div>
                     @endcan
                     <div class="nav-item">
                         <a href="pages/navbar.html"><i class="ik ik-menu"></i><span>Navigation</span>
                             <span class="badge badge-success">New</span></a>
                     </div>
                     @can('admin')
-                    <div class="nav-lavel">{{ __('Doctors') }}</div>
-                    <div class="nav-item has-sub">
-                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>{{ __('Doctors') }}</span>
-                            <span class="badge badge-danger">10+</span></a>
-                        <div class="submenu-content">
-                            <a href="{{ route('admin.doctor.index') }}" class="menu-item">{{ __('Doctors') }}</a>
-                            <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>
-                            <a href="pages/widget-data.html" class="menu-item">Data</a>
-                            <a href="pages/widget-chart.html" class="menu-item">Chart Widget</a>
+                        <div class="nav-lavel">{{ __('Doctors') }}</div>
+                        <div class="nav-item has-sub">
+                            <a href="javascript:void(0)"><i
+                                    class="ik .ik-briefcase                            "></i><span>{{ __('Doctors') }}</span>
+                                <span class="badge badge-danger">10+</span></a>
+                            <div class="submenu-content">
+                                <a href="{{ route('admin.doctor.index') }}"
+                                    class="menu-item">{{ __('Doctors') }}</a>
+                                <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>
+                                <a href="pages/widget-data.html" class="menu-item">Data</a>
+                                <a href="pages/widget-chart.html" class="menu-item">Chart Widget</a>
+                            </div>
                         </div>
-                    </div>
                     @endcan
                     <div class="nav-lavel">Patients</div>
                     <div class="nav-item has-sub">
-                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Widgets</span> <span class="badge badge-danger">150+</span></a>
+                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Widgets</span> <span
+                                class="badge badge-danger">150+</span></a>
                         <div class="submenu-content">
                             <a href="pages/widgets.html" class="menu-item">Basic</a>
                             <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>
@@ -79,43 +84,43 @@
                 <div class="list-group row">
                     <a href="javascript:void(0)" class="list-group-item" data-chat-user="Gene Newman">
                         <figure class="user--online">
-                            <img src="img/users/1.jpg" class="rounded-circle" alt="">
+                            <img src="" class="rounded-circle" alt="">
                         </figure><span><span class="name">Gene Newman</span> <span
                                 class="username">@gene_newman</span> </span>
                     </a>
                     <a href="javascript:void(0)" class="list-group-item" data-chat-user="Billy Black">
                         <figure class="user--online">
-                            <img src="img/users/2.jpg" class="rounded-circle" alt="">
+                            <img src="" class="rounded-circle" alt="">
                         </figure><span><span class="name">Billy Black</span> <span
                                 class="username">@billyblack</span> </span>
                     </a>
                     <a href="javascript:void(0)" class="list-group-item" data-chat-user="Herbert Diaz">
                         <figure class="user--online">
-                            <img src="img/users/3.jpg" class="rounded-circle" alt="">
+                            <img src="" class="rounded-circle" alt="">
                         </figure><span><span class="name">Herbert Diaz</span> <span
                                 class="username">@herbert</span> </span>
                     </a>
                     <a href="javascript:void(0)" class="list-group-item" data-chat-user="Sylvia Harvey">
                         <figure class="user--busy">
-                            <img src="img/users/4.jpg" class="rounded-circle" alt="">
+                            <img src="" class="rounded-circle" alt="">
                         </figure><span><span class="name">Sylvia Harvey</span> <span
                                 class="username">@sylvia</span> </span>
                     </a>
                     <a href="javascript:void(0)" class="list-group-item active" data-chat-user="Marsha Hoffman">
                         <figure class="user--busy">
-                            <img src="img/users/5.jpg" class="rounded-circle" alt="">
+                            <img src="" class="rounded-circle" alt="">
                         </figure><span><span class="name">Marsha Hoffman</span> <span
                                 class="username">@m_hoffman</span> </span>
                     </a>
                     <a href="javascript:void(0)" class="list-group-item" data-chat-user="Mason Grant">
                         <figure class="user--offline">
-                            <img src="img/users/1.jpg" class="rounded-circle" alt="">
+                            <img src="" class="rounded-circle" alt="">
                         </figure><span><span class="name">Mason Grant</span> <span
                                 class="username">@masongrant</span> </span>
                     </a>
                     <a href="javascript:void(0)" class="list-group-item" data-chat-user="Shelly Sullivan">
                         <figure class="user--offline">
-                            <img src="img/users/2.jpg" class="rounded-circle" alt="">
+                            <img src="" class="rounded-circle" alt="">
                         </figure><span><span class="name">Shelly Sullivan</span> <span
                                 class="username">@shelly</span></span>
                     </a>
@@ -138,7 +143,7 @@
                         <div class="message media reply">
                             <figure class="user--online">
                                 <a href="#">
-                                    <img src="img/users/3.jpg" class="rounded-circle" alt="">
+                                    <img src="" class="rounded-circle" alt="">
                                 </a>
                             </figure>
                             <div class="message-body media-body">
@@ -148,7 +153,7 @@
                         <div class="message media">
                             <figure class="user--online">
                                 <a href="#">
-                                    <img src="img/users/1.jpg" class="rounded-circle" alt="">
+                                    <img src="" class="rounded-circle" alt="">
                                 </a>
                             </figure>
                             <div class="message-body media-body">
@@ -158,7 +163,7 @@
                         <div class="message media reply">
                             <figure class="user--offline">
                                 <a href="#">
-                                    <img src="img/users/5.jpg" class="rounded-circle" alt="">
+                                    <img src="" class="rounded-circle" alt="">
                                 </a>
                             </figure>
                             <div class="message-body media-body">
@@ -169,7 +174,7 @@
                         <div class="message media">
                             <figure class="user--online">
                                 <a href="#">
-                                    <img src="img/users/1.jpg" class="rounded-circle" alt="">
+                                    <img src="" class="rounded-circle" alt="">
                                 </a>
                             </figure>
                             <div class="message-body media-body">
@@ -179,7 +184,7 @@
                         <div class="message media reply">
                             <figure class="user--busy">
                                 <a href="#">
-                                    <img src="img/users/5.jpg" class="rounded-circle" alt="">
+                                    <img src="" class="rounded-circle" alt="">
                                 </a>
                             </figure>
                             <div class="message-body media-body">
@@ -190,7 +195,7 @@
                         <div class="message media">
                             <figure class="user--online">
                                 <a href="#">
-                                    <img src="img/users/1.jpg" class="rounded-circle" alt="">
+                                    <img src="" class="rounded-circle" alt="">
                                 </a>
                             </figure>
                             <div class="message-body media-body">
@@ -209,5 +214,3 @@
             </form>
         </div>
     </div>
-
-

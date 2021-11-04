@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Settings\Time;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TimeController extends Controller
 {
@@ -15,13 +16,14 @@ class TimeController extends Controller
     public function index()
     {
         $times =Time::select('id','name')->get();
-        // dd($times);
-        return view('dashboard.settings.time.index',compact('times'));
+        $date = now()->startOfHour()->format('H:i');
+        dd($date);
+        return view('dashboard.settings.time.time_index',compact('times'));
     }
 
 
     public function create() {
-        return view('dashboard.settings.time.create');
+        return view('dashboard.settings.time.time_create');
     }
 
     /**
@@ -54,7 +56,7 @@ class TimeController extends Controller
      */
     public function edit(Time $time)
     {
-        //
+        return view('dashboard.settings.time.time_edit',compact('time'));
     }
 
     /**
@@ -66,7 +68,16 @@ class TimeController extends Controller
      */
     public function update(Request $request, Time $time)
     {
-        //
+        $request->validate([
+            'name' => ['required',Rule::unique(Time::getTableName(),'name')->ignore('id')]
+        ]);
+        $time->name = $request->name;
+        $time->updated_by = $request->updated_user;
+        $time->save();
+        return response()->json([
+            'success'=> $time->name.' '.'updated successfully'
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -77,6 +88,10 @@ class TimeController extends Controller
      */
     public function destroy(Time $time)
     {
-        //
+        $time->delete();
+        return response()->json([
+            'success'=> 'time'. $time->name.' '.'has been deleted successfully'
+        ]);
+
     }
 }

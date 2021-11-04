@@ -79,7 +79,7 @@ class AppointmentTimeSeeder extends Seeder
         for($i=0;$i<$maxCount;$i++){
             $data[] = [
                 'name' => $times[$i],
-                // 'created_by' => 1,
+                'created_by' => 1,
                 'created_at' => now(),
             ];
         }
